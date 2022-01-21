@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { DruhZvierata } from 'src/entities/druhZvierata';
+import { Osoba } from 'src/entities/osoba';
 import { ZvieraXMajitel } from 'src/entities/zvieraXmajitel';
 
 @Injectable({
@@ -23,5 +24,13 @@ export class ServerService {
 
   getSpecies(): Observable<DruhZvierata[]> {
     return this.http.get<DruhZvierata[]>(this.serverUrl + "species");
+  }
+
+  getUserByName(name: string): Observable<Osoba> {
+    return this.http.get<Osoba>(this.serverUrl + "users/" + name);
+  }
+
+  getAllUsers(): Observable<Osoba[]> {
+    return this.http.get<Osoba[]>(this.serverUrl + "users");
   }
 }
