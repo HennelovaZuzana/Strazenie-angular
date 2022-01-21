@@ -1,2 +1,8 @@
-<h1>Strazenie zvierat</h1>
-<router-outlet></router-outlet>
+<h1 style="text-align: center; margin: 2%;">Strazenie zvierat</h1>
+<h3 style="text-align: center; margin: 2%;">Prihlásenie</h3>
+<div style="text-align: center;">
+    <label for="userName" class="col-sm-2 col-form-label">Meno a priezvysko</label>
+    <input type="text" id="userName" class="form-control" style="width: 20%; margin: auto;" [(ngModel)]="userName" name="userName">
+    <button type="button" class="btn btn-success" style="margin: 1%;" (click)="validateUser()">Prihlásiť</button>
+</div>
+<!-- <router-outlet></router-outlet> -->

@@ -6,11 +6,13 @@ import { AnimalsToWatchComponent } from './animals-to-watch/animals-to-watch.com
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnimalsToWatchComponent
+    AnimalsToWatchComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
