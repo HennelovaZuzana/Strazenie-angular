@@ -1,3 +1,37 @@
-<div>
-    <button type="button" class="btn btn-primary" routerLink="/animals">Zvieratá na stráženie</button>
+<div class="main">
+    <button type="button" class="btn btn-primary" routerLink="/animals" style="margin: 0.5%;">Zvieratá na stráženie</button>
+    <br>
+        <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userInfo">
+        Osobné info
+    </button>
+    
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade modal-dialog modal-dialog-centered modal-xl" id="userInfo" tabindex="-1" aria-labelledby="userInfoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userInfoLabel">Osobné info</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body" *ngIf="user">
+                    <label for="userName">Meno a priezvisko:</label>
+                    <input class="form-control" type="text" aria-label="default input example" id="userName" [(ngModel)]="user.meno">
+
+                    <label for="userAddress">Adresa:</label>
+                    <input class="form-control" type="text" aria-label="default input example" id="userAddress" [(ngModel)]="user.adresa">
+
+                    <label for="userContact">Kontakt:</label>
+                    <input class="form-control" type="text" aria-label="default input example" id="userContact" [(ngModel)]="user.kontakt">
+                    
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušiť</button>
+                <button type="button" class="btn btn-primary" (click)=saveUser() data-bs-dismiss="modal">Uložiť</button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Osoba } from 'src/entities/osoba';
+import { ServerService } from 'src/services/server.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  userName: string = "";
+  user: Osoba | undefined;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private serverService: ServerService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
+    this.userName = this.activatedRoute.snapshot.params['userName'];
+    this.serverService.getUserByName(this.userName).subscribe(u => this.user = u);
+  }
+
+  saveUser(): void {
+    if (this.user){
+      this.serverService.sendUser(this.user).subscribe();
+      this.router.navigateByUrl("/menu/" + this.user.meno);
+    }
+    
   }
 
 }

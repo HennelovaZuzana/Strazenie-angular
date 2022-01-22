@@ -33,4 +33,8 @@ export class ServerService {
   getAllUsers(): Observable<Osoba[]> {
     return this.http.get<Osoba[]>(this.serverUrl + "users");
   }
+
+  sendUser(user: Osoba) : Observable<Osoba> {
+    return this.http.post<Osoba>(this.serverUrl + "users", user);
+  }
 }
