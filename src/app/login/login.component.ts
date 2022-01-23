@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   public userName: string = "";
   public users: Osoba[] = [];
   public found: boolean = true;
+  public registrationUser: Osoba = new Osoba("", "", "");
 
   constructor(private serverService: ServerService, private router: Router) { }
 
@@ -30,6 +31,14 @@ export class LoginComponent implements OnInit {
         }
       }
       this.found = false;
+    }
+  }
+
+  registerUser() {
+    if (this.registrationUser.meno.length > 0 && this.registrationUser.adresa.length > 0 && this.registrationUser.kontakt.length > 0){
+      let regUser: Osoba | undefined;
+      this.serverService.sendUser(this.registrationUser).subscribe(u => regUser = u);
+      this.users.push(this.registrationUser)
     }
   }
 }

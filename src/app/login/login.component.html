@@ -1,9 +1,46 @@
 <h3 style="text-align: center; margin: 2%;">Prihlásenie</h3>
-<div style="text-align: center;">
+<div class="main" style="text-align: center;">
     <label for="userName" class="col-sm-2 col-form-label">Meno a priezvisko</label>
     <input type="text" id="userName" class="form-control" style="width: 20%; margin: auto;" [(ngModel)]="userName" name="userName">
     <button type="button" class="btn btn-success" style="margin: 1%;" (click)="validateUser()">Prihlásiť</button>
-    <div *ngIf="!found" class="alert alert-danger" role="alert" style="width: 40%;">
+    <br>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrationModal">
+        Registrovať
+    </button>
+    <br>
+    <div *ngIf="!found" class="alert alert-danger" role="alert" style="width: 40%; margin: 1% auto;">
         Zlé prihlasovacie údaje!
     </div>
+    
+
 </div>
+
+<div>
+    <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="registrationModalLabel">Registrácia</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="userName">Meno a priezvisko:</label>
+                <input class="form-control" type="text" aria-label="default input example" id="userName" [(ngModel)]="registrationUser.meno" required #v1="ngModel">
+    
+                <label for="userAddress">Adresa:</label>
+                <input class="form-control" type="text" aria-label="default input example" id="userAddress" [(ngModel)]="registrationUser.adresa" required #v2="ngModel">
+    
+                <label for="userContact">Kontakt:</label>
+                <input class="form-control" type="text" aria-label="default input example" id="userContact" [(ngModel)]="registrationUser.kontakt" required #v3="ngModel">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušiť</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)=registerUser() [disabled]="v1.invalid || v2.invalid || v3.invalid">
+                Registrovať
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+  
