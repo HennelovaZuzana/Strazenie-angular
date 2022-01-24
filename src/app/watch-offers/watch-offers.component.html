@@ -1,1 +1,31 @@
-<p>watch-offers works!</p>
+<div>
+    <h2>Ponuka strážení:</h2>
+    <select class="form-select" style="float: left; width: 75%;" [(ngModel)]="selectedSpecies">
+        <option *ngFor="let spec of species" [ngValue]="spec">
+            {{ spec.druh }}
+        </option>
+    </select>
+    <button type="button" class="btn btn-dark" style="width: 25%;" (click)="filterSpecies()">
+        Hladať
+    </button>
+    <!-- <ul class="list-group" style="margin: 5% 0%">
+        <li *ngFor="let animal of animals" class="list-group-item">
+            {{animal.druh}} {{animal.pohl}}
+        </li>
+    </ul> -->
+    <table class="table table-striped table-light table-bordered" style="margin: 5% 0%;">
+        <thead>
+            <tr><th>Druh</th><th>Cena</th><th style="max-width: 200px;">Poznamka</th><th>Majitel</th><th>Adresa</th><th>Kontakt</th></tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let animal of animals">
+                <td>{{animal.druh}}</td>
+                <!-- <td>{{cena}}</td> -->
+                <td>{{animal.poznamka}}</td>
+                <td>{{animal.majitelMeno}}</td>
+                <td>{{animal.majitelAdresa}}</td>
+                <td>{{animal.majitelKontakt}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
