@@ -4,12 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AnimalsToWatchComponent } from './animals-to-watch/animals-to-watch.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
+import { WatchOffersComponent } from './watch-offers/watch-offers.component';
 
 const routes: Routes = [
   { path: 'animals', component: AnimalsToWatchComponent },
   { path: '', component: LoginComponent},
   { path: 'menu/:userName', component: MenuComponent},
-  { path: '**', redirectTo: 'menu' }
+  { path: '**', redirectTo: 'menu' },
+  { path: 'watch', component: WatchOffersComponent }
 ];
 
 @NgModule({
