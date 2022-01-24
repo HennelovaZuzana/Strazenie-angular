@@ -4,7 +4,7 @@ import { catchError, mapTo, Observable, of } from 'rxjs';
 import { DruhZvierata } from 'src/entities/druhZvierata';
 import { Osoba } from 'src/entities/osoba';
 import { VieStazit } from 'src/entities/vieStrazit';
-import { Zviera } from 'src/entities/Zviera';
+import { Zviera } from 'src/entities/zviera';
 import { ZvieraXMajitel } from 'src/entities/zvieraXmajitel';
 
 @Injectable({

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DruhZvierata } from 'src/entities/druhZvierata';
 import { Osoba } from 'src/entities/osoba';
 import { VieStazit } from 'src/entities/vieStrazit';
-import { Zviera } from 'src/entities/Zviera';
+import { Zviera } from 'src/entities/zviera';
 import { ServerService } from 'src/services/server.service';
 
 @Component({
