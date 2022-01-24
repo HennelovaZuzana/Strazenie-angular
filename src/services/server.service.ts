@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { catchError, mapTo, Observable, of } from 'rxjs';
 import { DruhZvierata } from 'src/entities/druhZvierata';
 import { Osoba } from 'src/entities/osoba';
+import { VieStazit } from 'src/entities/vieStrazit';
+import { Zviera } from 'src/entities/Zviera';
 import { ZvieraXMajitel } from 'src/entities/zvieraXmajitel';
 
 @Injectable({
@@ -34,15 +36,22 @@ export class ServerService {
     return this.http.get<Osoba[]>(this.serverUrl + "users");
   }
 
-  sendUser(user: Osoba) : Observable<Osoba> {
+  sendUser(user: Osoba): Observable<Osoba> {
     return this.http.post<Osoba>(this.serverUrl + "users", user);
   }
 
-  deleteUser(user: Osoba) : Observable<boolean> {
+  deleteUser(user: Osoba): Observable<boolean> {
     return this.http.delete(this.serverUrl + "users/" + user.id).pipe(
       mapTo(true),
       catchError(error => of(false))
     );
-    
+  }
+
+  getUserAnimals(user: Osoba): Observable<Zviera[]> {
+    return this.http.get<Zviera[]>(this.serverUrl + "animals/owner/" + user.id);
+  }
+
+  getUserWatch(user: Osoba): Observable<VieStazit[]> {
+    return this.http.get<VieStazit[]>(this.serverUrl + "watch/user/" + user.id);
   }
 }
