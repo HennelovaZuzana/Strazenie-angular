@@ -1,5 +1,11 @@
 div.main {
-    width: 70%;
+    width: 90%;
     text-align: center;
+    margin: 0 auto 15% auto;
+    background-color: azure;
+}
+.window {
+    width: 70%;
     margin: auto;
+    background-color: azure;
 }
