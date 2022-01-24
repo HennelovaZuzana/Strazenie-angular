@@ -1,10 +1,10 @@
 <div class="main">
-    <button type="button" class="btn btn-primary" routerLink="/animals" style="margin: 0.5%;">Zvieratá na stráženie</button>
+    <button type="button" class="btn btn-primary" routerLink="/animals" style="margin: 0.5% auto;">Zvieratá na stráženie</button>
     <br>
-    <button type="button" class="btn btn-primary" routerLink="/watch" style="margin: 0.5%;">Ponuky strážení</button>
+    <button type="button" class="btn btn-primary" routerLink="/watch" style="margin: 0.5% auto;">Ponuky strážení</button>
     <br>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userInfo">
+    <button type="button" class="btn btn-primary" style="margin: 0.5% auto;" data-bs-toggle="modal" data-bs-target="#userInfo">
         Osobné info
     </button>
     
@@ -32,6 +32,7 @@
                     
                 </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteUser()">Zmazať účet</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušiť</button>
                 <button type="button" class="btn btn-primary" (click)=saveUser() data-bs-dismiss="modal">Uložiť</button>
             </div>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { catchError, mapTo, Observable, of } from 'rxjs';
 import { DruhZvierata } from 'src/entities/druhZvierata';
 import { Osoba } from 'src/entities/osoba';
 import { ZvieraXMajitel } from 'src/entities/zvieraXmajitel';
@@ -36,5 +36,13 @@ export class ServerService {
 
   sendUser(user: Osoba) : Observable<Osoba> {
     return this.http.post<Osoba>(this.serverUrl + "users", user);
+  }
+
+  deleteUser(user: Osoba) : Observable<boolean> {
+    return this.http.delete(this.serverUrl + "users/" + user.id).pipe(
+      mapTo(true),
+      catchError(error => of(false))
+    );
+    
   }
 }

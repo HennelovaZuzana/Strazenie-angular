@@ -29,7 +29,15 @@ export class MenuComponent implements OnInit {
       this.serverService.sendUser(this.user).subscribe();
       this.router.navigateByUrl("/menu/" + this.user.meno);
     }
-    
+  }
+
+  deleteUser(): void {
+    if (this.user){
+      if (confirm("Naozaj si prajete zmazať svoj účet?")) {
+        this.serverService.deleteUser(this.user).subscribe();
+        this.router.navigateByUrl("");
+      }
+    }
   }
 
 }
