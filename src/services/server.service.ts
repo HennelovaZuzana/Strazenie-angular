@@ -32,6 +32,10 @@ export class ServerService {
     return this.http.get<Osoba>(this.serverUrl + "users/" + name);
   }
 
+  getUserById(id: number): Observable<Osoba> {
+    return this.http.get<Osoba>(this.serverUrl + "users/" + id);
+  }
+
   getAllUsers(): Observable<Osoba[]> {
     return this.http.get<Osoba[]>(this.serverUrl + "users");
   }
@@ -53,5 +57,9 @@ export class ServerService {
 
   getUserWatch(user: Osoba): Observable<VieStazit[]> {
     return this.http.get<VieStazit[]>(this.serverUrl + "watch/user/" + user.id);
+  }
+
+  getByDruhId(speciesId: number): Observable<VieStazit[]>{
+    return this.http.get<VieStazit[]>(this.serverUrl + "watch/" + speciesId);
   }
 }

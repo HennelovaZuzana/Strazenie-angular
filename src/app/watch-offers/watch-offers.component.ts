@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DruhZvierata } from 'src/entities/druhZvierata';
 import { Osoba } from 'src/entities/osoba';
-import { ZvieraXMajitel } from 'src/entities/zvieraXmajitel';
+import { VieStazit } from 'src/entities/vieStrazit';
 import { ServerService } from 'src/services/server.service';
 
 @Component({
@@ -11,10 +11,10 @@ import { ServerService } from 'src/services/server.service';
 })
 export class WatchOffersComponent implements OnInit {
 
-  public animals: ZvieraXMajitel[] = [];
+  public offers: VieStazit[] = [];
   species: DruhZvierata[] = [];
   selectedSpecies: DruhZvierata | undefined;
-  users: Osoba[] = [];
+  user: Osoba | undefined;
 
   constructor(private serverService: ServerService) { }
 
@@ -24,15 +24,22 @@ export class WatchOffersComponent implements OnInit {
       this.species.splice(0, 0, new DruhZvierata(0, "Všetky"));
       this.selectedSpecies = this.species[0];
     });
-    this.serverService.getAnimalsToWatch().subscribe(anim => this.animals = anim);
+    this.serverService.getByDruhId(0).subscribe(offr => {
+      offr.forEach(offer => {
+        this.serverService.getUserById(offer.osobaId).subscribe(os => this.user = os);
+        const newOff = new VieStazit(offer.id, offer.cena, offer.poznamka, offer.druhId, offer.osobaId, offer.druh, this.user?.meno, this.user?.adresa, this.user?.kontakt )
+        this.offers.push(newOff);
+      });
+    });
+
   }
 
   filterSpecies(): void {
     if (this.selectedSpecies) {
       if (this.selectedSpecies.druh === "Všetky"){
-        this.serverService.getAnimalsToWatch().subscribe(anim => this.animals = anim);
+        this.serverService.getByDruhId(0).subscribe(anim => this.offers = anim);
       } else {
-        this.serverService.getAnimalsBySpecies(this.selectedSpecies?.druh).subscribe(anim => this.animals = anim);
+        this.serverService.getByDruhId(this.selectedSpecies?.id).subscribe(anim => this.offers = anim);
       }
     }
   }

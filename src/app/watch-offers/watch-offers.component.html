@@ -15,16 +15,16 @@
     </ul> -->
     <table class="table table-striped table-light table-bordered" style="margin: 5% 0%;">
         <thead>
-            <tr><th>Druh</th><th>Cena</th><th style="max-width: 200px;">Poznamka</th><th>Majitel</th><th>Adresa</th><th>Kontakt</th></tr>
+            <tr><th>Druh</th><th>Cena</th><th>Majitel</th><th>Adresa</th><th>Kontakt</th><th style="max-width: 200px;">Poznamka</th></tr>
         </thead>
         <tbody>
-            <tr *ngFor="let animal of animals">
-                <td>{{animal.druh}}</td>
-                <!-- <td>{{cena}}</td> -->
-                <td>{{animal.poznamka}}</td>
-                <td>{{animal.majitelMeno}}</td>
-                <td>{{animal.majitelAdresa}}</td>
-                <td>{{animal.majitelKontakt}}</td>
+            <tr *ngFor="let offer of offers">
+                <td>{{offer.druh}}</td>
+                <td>{{offer.cena}}</td>
+                <td>{{offer.majitelMeno}}</td>
+                <td>{{offer.majitelAdresa}}</td>
+                <td>{{offer.majitelKontakt}}</td>
+                <td>{{offer.poznamka}}</td>
             </tr>
         </tbody>
     </table>
