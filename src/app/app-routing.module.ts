@@ -10,8 +10,8 @@ const routes: Routes = [
   { path: 'animals', component: AnimalsToWatchComponent },
   { path: '', component: LoginComponent},
   { path: 'menu/:userName', component: MenuComponent},
-  { path: '**', redirectTo: 'menu' },
-  { path: 'watch', component: WatchOffersComponent }
+  { path: 'watch', component: WatchOffersComponent },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
