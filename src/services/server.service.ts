@@ -66,4 +66,11 @@ export class ServerService {
   sendAnimal(animal: Zviera): Observable<Zviera> {
     return this.http.post<Zviera>(this.serverUrl + "animals", animal);
   }
+
+  deleteAnimal(animal: Zviera): Observable<boolean> {
+    return this.http.delete(this.serverUrl + "animals/" + animal.id).pipe(
+      mapTo(true),
+      catchError(error => of(false))
+    )
+  }
 }

@@ -1,3 +1,4 @@
+import { newArray } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DruhZvierata } from 'src/entities/druhZvierata';
@@ -60,15 +61,49 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  setSelectedAnimal(animal: Zviera) {
+    this.editedAnimal = new Zviera(animal.majitelId, animal.druhZvierataId, animal.meno, animal.pohlavie,
+      animal.poznamka, animal.strazenieOd, animal.strazenieDo, animal.id);
+    
+  }
+
   saveAnimal() {
     if(this.editedAnimal){
       this.serverService.sendAnimal(this.editedAnimal).subscribe(anim => {
         console.log(anim.id);
-        
-        this.userAnimals.push(anim);
+        if (this.editedAnimal?.id) {
+          const newArr: Zviera[] = [];
+          for (let animal of this.userAnimals){
+            if (animal.id === anim.id){
+              newArr.push(anim);
+            } else {
+              newArr.push(animal);
+            }
+          }
+          this.userAnimals = newArr;
+        } else {
+          this.userAnimals.push(anim);
+        }
       });
       
       
+    }
+  }
+
+  deleteAnimal() {
+    if (this.editedAnimal){
+      console.log("here");
+      
+      if (confirm("Naozaj si prajete zmazať toto zviera?")) {
+        this.serverService.deleteAnimal(this.editedAnimal).subscribe()
+        const newArr: Zviera[] = [];
+        for (let animal of this.userAnimals) {
+          if (animal.id != this.editedAnimal.id){
+            newArr.push(animal);
+          }
+        }
+        this.userAnimals = newArr;
+      }
     }
   }
 
