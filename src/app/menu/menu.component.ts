@@ -18,6 +18,7 @@ export class MenuComponent implements OnInit {
   userAnimals: Zviera[] = [];
   userWatch: VieStazit[] = [];
   species: DruhZvierata[] = [];
+  editedAnimal: Zviera | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -51,6 +52,28 @@ export class MenuComponent implements OnInit {
         this.router.navigateByUrl("");
       }
     }
+  }
+
+  setNewAnimal() {
+    if (this.user?.id) {
+      this.editedAnimal = new Zviera(this.user?.id, -1, "", "samec", "", new Date(), new Date());
+    }
+  }
+
+  saveAnimal() {
+    if(this.editedAnimal){
+      this.serverService.sendAnimal(this.editedAnimal).subscribe(anim => {
+        console.log(anim.id);
+        
+        this.userAnimals.push(anim);
+      });
+      
+      
+    }
+  }
+
+  changeDate(event: string): Date{
+    return new Date(event);
   }
 
 }

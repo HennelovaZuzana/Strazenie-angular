@@ -62,4 +62,8 @@ export class ServerService {
   getByDruhId(speciesId: number): Observable<VieStazit[]>{
     return this.http.get<VieStazit[]>(this.serverUrl + "watch/" + speciesId);
   }
+
+  sendAnimal(animal: Zviera): Observable<Zviera> {
+    return this.http.post<Zviera>(this.serverUrl + "animals", animal);
+  }
 }

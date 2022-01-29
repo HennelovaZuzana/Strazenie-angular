@@ -1,7 +1,6 @@
 export class Zviera {
 
     constructor(
-        public id: number,
         public majitelId: number,
         public druhZvierataId: number,
         public meno: string,
@@ -9,6 +8,7 @@ export class Zviera {
         public poznamka: string,
         public strazenieOd: Date,
         public strazenieDo: Date,
+        public id?: number,
         public druh?: string
     ) { }
 }
