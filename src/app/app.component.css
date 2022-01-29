@@ -8,3 +8,12 @@
     -o-background-size: cover;
     background-size: cover;
 }
+
+.component {
+    width: 70%;
+    text-align: center;
+    align-content: center;
+    margin: auto;
+    padding: 0.1% 0 1% 0;
+    background-color: white;
+}
