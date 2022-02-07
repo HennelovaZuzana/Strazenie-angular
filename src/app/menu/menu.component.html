@@ -4,6 +4,7 @@
     <button type="button" class="btn btn-outline-dark" style="margin: auto; min-width: 200px" data-bs-toggle="modal" data-bs-target="#userInfo">
         Osobné info
     </button>
+    <button type="button" class="btn btn-outline-dark" routerLink="" style="margin: auto; min-width: 200px">Odhlásiť sa</button>
     
     <!-- user's animals -->
     <h5  class="display-6" style="margin: 8% 0 3% 0;">Moje Zvieratá</h5>
@@ -52,7 +53,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Modal user info -->
 <div class="modal fade" id="userInfo" tabindex="-1" aria-labelledby="userInfoLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -80,20 +81,21 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="addAnimal" tabindex="-1" aria-labelledby="addAnimalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addAnimalLabel">Zviera</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+<!-- Modal add/edit animal -->
+<div>
+    <div class="modal fade" id="addAnimal" tabindex="-1" aria-labelledby="addAnimalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAnimalLabel">Zviera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body" *ngIf="editedAnimal">
                     <label for="name">Meno:</label>
-                    <input class="form-control" type="text" aria-label="default input example" id="name" [(ngModel)]="editedAnimal.meno">
+                    <input class="form-control" type="text" aria-label="default input example" id="name" [(ngModel)]="editedAnimal.meno" name="name" required #v1="ngModel">
 
                     <label for="species">Druh:</label>
-                    <select id="species" class="form-select" [ngModel]=species[editedAnimal.druhZvierataId-1] (ngModelChange)="editedAnimal.druhZvierataId = $event.id" >
+                    <select id="species" class="form-select" [ngModel]=species[editedAnimal.druhZvierataId-1] (ngModelChange)="editedAnimal.druhZvierataId = $event.id" required #v3="ngModel">
                         <option *ngFor="let spec of species" [ngValue]="spec">
                             {{ spec.druh }}
                         </option>
@@ -108,7 +110,7 @@
                     <div class="mb-3 row">
                         <label for="inputWhen" class="col-sm-2 col-form-label">Strazenie od:</label>
                         <div class="col-sm-10">
-                          <input type="date" class="form-control" id="inputWhen" 
+                        <input type="date" class="form-control" id="inputWhen" 
                             [ngModel]="editedAnimal.strazenieOd | date: 'yyyy-MM-dd'" (ngModelChange)="editedAnimal.strazenieOd = changeDate($event)" >
                         </div>
                     </div>
@@ -116,19 +118,20 @@
                     <div class="mb-3 row">
                         <label for="inputWhen" class="col-sm-2 col-form-label">Strazenie do:</label>
                         <div class="col-sm-10">
-                          <input type="date" class="form-control" id="inputWhen" 
-                          [ngModel]="editedAnimal.strazenieDo | date: 'yyyy-MM-dd'" (ngModelChange)="editedAnimal.strazenieDo = changeDate($event)" >
+                        <input type="date" class="form-control" id="inputWhen" 
+                        [ngModel]="editedAnimal.strazenieDo | date: 'yyyy-MM-dd'" (ngModelChange)="editedAnimal.strazenieDo = changeDate($event)" >
                         </div>
                     </div>
 
-                    <label for="name">Poznamka:</label>
-                    <input class="form-control" type="text" aria-label="default input example" id="name" [(ngModel)]="editedAnimal.poznamka" >
-                    
+                    <label for="note">Poznamka:</label>
+                    <input class="form-control" type="text" aria-label="default input example" id="note" name="note" [(ngModel)]="editedAnimal.poznamka" required #v2="ngModel">
+                
+                    <div class="modal-footer">
+                        <button *ngIf="editedAnimal && editedAnimal.id" type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)=deleteAnimal()>Vymazať</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušiť</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)=saveAnimal() [disabled]="v1.invalid || v2.invalid || v3.invalid">Uložiť</button>
+                    </div>
                 </div>
-            <div class="modal-footer">
-                <button *ngIf="editedAnimal && editedAnimal.id" type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)=deleteAnimal()>Vymazať</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušiť</button>
-                <button type="button" class="btn btn-primary" (click)=saveAnimal() data-bs-dismiss="modal">Uložiť</button>
             </div>
         </div>
     </div>

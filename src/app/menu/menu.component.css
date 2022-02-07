@@ -5,3 +5,12 @@
     text-align: center;
     
 }
+
+.ng-valid[required] {
+    border-left: 5px solid rgb(0, 192, 0);
+}
+
+.ng-invalid {
+    border-left: 5px solid rgb(197, 3, 3);
+}
+   
