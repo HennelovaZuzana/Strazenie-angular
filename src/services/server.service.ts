@@ -73,4 +73,15 @@ export class ServerService {
       catchError(error => of(false))
     )
   }
+
+  sendOffer(offer: VieStazit): Observable<VieStazit> {
+    return this.http.post<VieStazit>(this.serverUrl + "watch", offer);
+  }
+
+  deleteOffer(offer: VieStazit): Observable<boolean> {
+    return this.http.delete(this.serverUrl + "watch/" + offer.id).pipe(
+      mapTo(true),
+      catchError(error => of(false))
+    )
+  }
 }

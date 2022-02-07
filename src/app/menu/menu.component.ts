@@ -20,6 +20,7 @@ export class MenuComponent implements OnInit {
   userWatch: VieStazit[] = [];
   species: DruhZvierata[] = [];
   editedAnimal: Zviera | undefined;
+  editedOffer: VieStazit | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -70,7 +71,6 @@ export class MenuComponent implements OnInit {
   saveAnimal() {
     if(this.editedAnimal){
       this.serverService.sendAnimal(this.editedAnimal).subscribe(anim => {
-        console.log(anim.id);
         if (this.editedAnimal?.id) {
           const newArr: Zviera[] = [];
           for (let animal of this.userAnimals){
@@ -92,7 +92,6 @@ export class MenuComponent implements OnInit {
 
   deleteAnimal() {
     if (this.editedAnimal){
-      console.log("here");
       
       if (confirm("Naozaj si prajete zmazať toto zviera?")) {
         this.serverService.deleteAnimal(this.editedAnimal).subscribe()
@@ -109,6 +108,52 @@ export class MenuComponent implements OnInit {
 
   changeDate(event: string): Date{
     return new Date(event);
+  }
+
+  setNewOffer() {
+    if(this.user?.id){
+      this.editedOffer = new VieStazit(0, "", -1, this.user?.id, undefined, undefined, this.user.meno, this.user.adresa, this.user.kontakt);
+    }
+  }
+
+  setSelectedOffer(offer: VieStazit) {
+    this.editedOffer = new VieStazit(offer.cena, offer.poznamka, offer.druhId, offer.osobaId, 
+                            offer.id, offer.druh, offer.majitelMeno, offer.majitelAdresa, offer.majitelKontakt);
+  }
+
+  saveOffer() {
+    if (this.editedOffer){
+      this.serverService.sendOffer(this.editedOffer).subscribe(offer => {
+        if (this.editedOffer?.id) {
+          const newArr: VieStazit[] = [];
+          for (let o of this.userWatch){
+            if (o.id === offer.id){
+              newArr.push(offer);
+            } else {
+              newArr.push(o);
+            }
+          }
+          this.userWatch = newArr;
+        } else {
+          this.userWatch.push(offer);
+        }
+      });
+    }
+  }
+
+  deleteOffer() {
+    if (this.editedOffer){
+      if (confirm("Naozaj si prajete zmazať túto ponuku?")) {
+        this.serverService.deleteOffer(this.editedOffer).subscribe();
+        const newArr: VieStazit[] = [];
+          for (let o of this.userWatch){
+            if (o.id != this.editedOffer.id){
+              newArr.push(o);
+            }
+          }
+          this.userWatch = newArr;
+      }
+    }
   }
 
 }

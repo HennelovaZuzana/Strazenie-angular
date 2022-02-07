@@ -40,17 +40,27 @@
     <h5 class="display-6" style="margin: 8% 0 3% 0;">Moje Ponuky</h5>
     <table class="table table-striped table-light table-bordered">
         <thead>
-            <tr><th>Druh</th><th>Cena</th><th style="max-width: 100px;">Poznamka</th></tr>
+            <tr><th>Druh</th><th>Cena</th><th style="max-width: 100px;">Poznamka</th><th style="width: 100px;"></th></tr>
         </thead>
         <tbody>
             <tr *ngFor="let watch of userWatch">
                 <td>{{species[watch.druhId - 1].druh}}</td>
                 <td>{{watch.cena}}</td>
                 <td>{{watch.poznamka}}</td>
+                <td>
+                    <button type="button" class="btn btn-light" (click)="setSelectedOffer(watch)" data-bs-toggle="modal" data-bs-target="#addOffer">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
+
+    <button type="button" class="btn btn-success" style="margin: 0.5% auto;" data-bs-toggle="modal" data-bs-target="#addOffer" (click)=setNewOffer()>
+        Pridať ponuku
+    </button>
 </div>
+
 
 
 <!-- Modal user info -->
@@ -123,7 +133,7 @@
                         </div>
                     </div>
 
-                    <label for="note">Poznamka:</label>
+                    <label for="note">Poznámka:</label>
                     <input class="form-control" type="text" aria-label="default input example" id="note" name="note" [(ngModel)]="editedAnimal.poznamka" required #v2="ngModel">
                 
                     <div class="modal-footer">
@@ -132,6 +142,40 @@
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)=saveAnimal() [disabled]="v1.invalid || v2.invalid || v3.invalid">Uložiť</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal add/edit offer -->
+<div class="modal fade" id="addOffer" tabindex="-1" aria-labelledby="addOfferLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addOfferLabel">Osobné info</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body" *ngIf="editedOffer">
+                    <label for="species">Druh:</label>
+                    <select id="species" class="form-select" [ngModel]=species[editedOffer.druhId-1] (ngModelChange)="editedOffer.druhId = $event.id" required #a1="ngModel">
+                        <option *ngFor="let spec of species" [ngValue]="spec">
+                            {{ spec.druh }}
+                        </option>
+                    </select>
+
+                    <label for="price">Cena:</label>
+                    <input class="form-control" type="number" id="price" [(ngModel)]="editedOffer.cena" min="0" name="price">
+                    
+
+                    <label for="note">Poznámka:</label>
+                    <input class="form-control" type="text" aria-label="default input example" id="note" [(ngModel)]="editedOffer.poznamka" name="note">
+
+                    
+                </div>
+            <div class="modal-footer">
+                <button *ngIf="editedOffer && editedOffer.id" type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)=deleteOffer()>Vymazať</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušiť</button>
+                <button type="button" class="btn btn-primary" (click)=saveOffer() data-bs-dismiss="modal">Uložiť</button>
             </div>
         </div>
     </div>

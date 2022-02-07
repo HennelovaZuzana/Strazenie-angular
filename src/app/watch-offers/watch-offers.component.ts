@@ -27,7 +27,7 @@ export class WatchOffersComponent implements OnInit {
     this.serverService.getByDruhId(0).subscribe(offr => {
       offr.forEach(offer => {
         this.serverService.getUserById(offer.osobaId).subscribe(os => this.user = os);
-        const newOff = new VieStazit(offer.id, offer.cena, offer.poznamka, offer.druhId, offer.osobaId, offer.druh, this.user?.meno, this.user?.adresa, this.user?.kontakt )
+        const newOff = new VieStazit(offer.cena, offer.poznamka, offer.druhId, offer.osobaId, offer.id, offer.druh, this.user?.meno, this.user?.adresa, this.user?.kontakt )
         this.offers.push(newOff);
       });
     });
