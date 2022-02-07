@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, mapTo, Observable, of } from 'rxjs';
 import { DruhZvierata } from 'src/entities/druhZvierata';
 import { Osoba } from 'src/entities/osoba';
+import { Strazca } from 'src/entities/strazca';
 import { VieStazit } from 'src/entities/vieStrazit';
 import { Zviera } from 'src/entities/zviera';
 import { ZvieraXMajitel } from 'src/entities/zvieraXmajitel';
@@ -59,8 +60,8 @@ export class ServerService {
     return this.http.get<VieStazit[]>(this.serverUrl + "watch/user/" + user.id);
   }
 
-  getByDruhId(speciesId: number): Observable<VieStazit[]>{
-    return this.http.get<VieStazit[]>(this.serverUrl + "watch/" + speciesId);
+  getByDruhId(speciesId: number): Observable<Strazca[]>{
+    return this.http.get<Strazca[]>(this.serverUrl + "watch/" + speciesId);
   }
 
   sendAnimal(animal: Zviera): Observable<Zviera> {
