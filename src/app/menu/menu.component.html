@@ -105,7 +105,7 @@
                     <input class="form-control" type="text" aria-label="default input example" id="name" [(ngModel)]="editedAnimal.meno" name="name" required #v1="ngModel">
 
                     <label for="species">Druh:</label>
-                    <select id="species" class="form-select" [ngModel]=species[editedAnimal.druhZvierataId-1] (ngModelChange)="editedAnimal.druhZvierataId = $event.id" required #v3="ngModel">
+                    <select id="species" class="form-select" [ngModel]=species[editedAnimal.druhZvierataId-1] (ngModelChange)="editedAnimal.druhZvierataId = $event.id" required #v2="ngModel">
                         <option *ngFor="let spec of species" [ngValue]="spec">
                             {{ spec.druh }}
                         </option>
@@ -134,12 +134,12 @@
                     </div>
 
                     <label for="note">Poznámka:</label>
-                    <input class="form-control" type="text" aria-label="default input example" id="note" name="note" [(ngModel)]="editedAnimal.poznamka" required #v2="ngModel">
+                    <input class="form-control" type="text" aria-label="default input example" id="note" name="note" [(ngModel)]="editedAnimal.poznamka">
                 
                     <div class="modal-footer">
                         <button *ngIf="editedAnimal && editedAnimal.id" type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)=deleteAnimal()>Vymazať</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušiť</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)=saveAnimal() [disabled]="v1.invalid || v2.invalid || v3.invalid">Uložiť</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)=saveAnimal() [disabled]="v1.invalid || v2.invalid">Uložiť</button>
                     </div>
                 </div>
             </div>
