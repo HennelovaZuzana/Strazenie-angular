@@ -23,14 +23,19 @@ export class LoginComponent implements OnInit {
 
   validateUser(): void{
     if(this.userName.length > 0) {
-      for (let user of this.users){
-        if (user.meno === this.userName){
-          this.found = true;
-          this.router.navigateByUrl("/menu/" + this.userName);
-          break;
+      this.serverService.getAllUsers().subscribe(u => {
+        this.users = u;
+        for (let user of this.users){
+          if (user.meno === this.userName){
+            this.found = true;
+            this.router.navigateByUrl("/menu/" + this.userName);
+            break;
+          }
         }
-      }
-      this.found = false;
+        this.found = false;
+
+      });
+      
     }
   }
 

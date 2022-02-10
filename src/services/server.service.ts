@@ -34,7 +34,7 @@ export class ServerService {
   }
 
   getUserById(id: number): Observable<Osoba> {
-    return this.http.get<Osoba>(this.serverUrl + "users/" + id);
+    return this.http.get<Osoba>(this.serverUrl + "users/id/" + id);
   }
 
   getAllUsers(): Observable<Osoba[]> {
@@ -46,7 +46,7 @@ export class ServerService {
   }
 
   deleteUser(user: Osoba): Observable<boolean> {
-    return this.http.delete(this.serverUrl + "users/" + user.id).pipe(
+    return this.http.delete(this.serverUrl + "users/del/" + user.id).pipe(
       mapTo(true),
       catchError(error => of(false))
     );
